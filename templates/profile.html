@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS styles */
+    body {
+      background-color: #f0f2f5;
+      font-family: Arial, sans-serif;
+    }
+    .navbar {
+      background-color: #2c3e50; /* Dark blue */
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+      color: #ffffff; /* White */
+      font-weight: bold;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .profile-header {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: block;
+      border: 5px solid #ffffff; /* White border */
+    }
+    .profile-name {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #2c3e50; /* Dark blue */
+    }
+    .profile-details {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    .btn-update-profile {
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .btn-update-profile:hover {
+      background-color: #2c3e50; /* Dark blue */
+    }
+    .btn-update-profile:focus {
+      background-color: #1d2836; /* Darker blue */
+      box-shadow: none;
+    }
+    .feature-options {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    .feature-options h4 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #2c3e50; /* Dark blue */
+    }
+    .feature-description {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #495057; /* Gray */
+    }
+    .btn-feature {
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .btn-feature:hover {
+      background-color: #2c3e50; /* Dark blue */
+    }
+    .btn-feature:focus {
+      background-color: #1d2836; /* Darker blue */
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Lung Disease Detection</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-header text-center">
+                {% if user.profile_image %}
+                    <img src="data:image/jpeg;base64,{{ user.profile_image }}" alt="Profile Picture" class="profile-pic">
+                {% else %}
+                    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+                {% endif %}
+                <h2 class="profile-name">{{ user.name }}</h2>
+                <div class="profile-details">
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Address:</strong> {{ user.address }}</p>
+                    <!-- Add more profile details as needed -->
+                </div>
+          <a href="/update_profile" class="btn btn-primary btn-update-profile">Update Profile</a>
+		  <a href="/logout" class="btn btn-danger">Logout</a> <!-- Logout button -->
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="feature-options">
+    <h4>Features</h4>
+    <div class="feature-description">
+        <p>Analyze symptoms provided by the user to detect potential lung-related diseases.</p>
+        <img src="https://via.placeholder.com/300x150" alt="Disease Detection from Image" class="img-fluid mb-3">
+        <a href="/disease_detection" class="btn btn-primary btn-feature">Disease Detection from Image</a>
+    </div>
+    <div class="feature-description">
+        <p>Connect with nearby doctors specialized in lung-related diseases.</p>
+        <img src="https://via.placeholder.com/300x150" alt="Doctor Consultation" class="img-fluid mb-3">
+        <a href="#" class="btn btn-primary btn-feature">Doctor Consultation</a>
+    </div>
+    <div class="feature-description">
+        <p>Add and manage patient details including name, age, gender, contact information, and medical history.</p>
+        <img src="https://via.placeholder.com/300x150" alt="Add Patient Details" class="img-fluid mb-3">
+        <a href="{{ url_for('add_patient_details') }}" class="btn btn-primary btn-feature">Add Patient Details</a>
+    </div>
+	<div class="feature-description">
+    <p>View list of patients added by the user.</p>
+	<img src="https://via.placeholder.com/300x150" alt="View Patients List" class="img-fluid mb-3">
+    <a href="{{ url_for('view_patients') }}" class="btn btn-primary btn-feature">View Patients List</a>
+  </div>
+    <!-- Add more feature options as needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- JavaScript for displaying pop-up message -->
+  <script>
+    $(document).ready(function(){
+      // Display sign-in or update profile message as pop-up
+      {% if message %}
+      alert("{{ message }}");
+      {% endif %}
+    });
+  </script>
+</body>
+</html>
