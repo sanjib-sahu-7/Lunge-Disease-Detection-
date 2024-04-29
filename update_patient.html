@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Patient Details</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS styles */
+    body {
+      background-color: #f0f2f5;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .form-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .btn-submit {
+      width: 100%;
+      font-size: 18px;
+    }
+    .btn-submit:hover {
+      background-color: #2c3e50; /* Dark blue */
+    }
+    .btn-submit:focus {
+      background-color: #1d2836; /* Darker blue */
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="form-container">
+        <h2 class="text-center mb-4">Update Patient Details</h2>
+         <form action="/update_patient/{{ patient._id }}" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="name">Patient Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter patient's name" required value="{{ patient.name }}">
+          </div>
+          <div class="form-group">
+            <label for="age">Patient Age</label>
+            <input type="number" class="form-control" id="age" name="age" placeholder="Enter patient's age" required value="{{ patient.age }}">
+          </div>
+          <div class="form-group">
+            <label for="gender">Patient Gender</label>
+            <select class="form-control" id="gender" name="gender" required>
+              <option value="male" {% if patient.gender == 'male' %} selected {% endif %}>Male</option>
+              <option value="female" {% if patient.gender == 'female' %} selected {% endif %}>Female</option>
+              <option value="other" {% if patient.gender == 'other' %} selected {% endif %}>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="disease">Disease Name</label>
+            <input type="text" class="form-control" id="disease" name="disease" placeholder="Enter disease name" required value="{{ patient.disease }}">
+          </div>
+          <div class="form-group">
+            <label for="diseaseImage">Update Disease Image</label>
+            <input type="file" class="form-control-file" id="diseaseImage" name="diseaseImage" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

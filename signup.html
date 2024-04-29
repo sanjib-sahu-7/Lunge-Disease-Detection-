@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS styles */
+    body {
+      background-image: url('https://via.placeholder.com/1500x1000'); /* Background image URL */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: Arial, sans-serif;
+    }
+    .signup-container {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 100px;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 25px;
+    }
+    .btn-signup {
+      width: 100%;
+    }
+    .btn-signup:hover {
+      background-color: #007bff; /* Blue */
+    }
+    .btn-signup:focus {
+      background-color: #0056b3; /* Darker blue */
+      box-shadow: none;
+    }
+    .login-link {
+      color: #007bff; /* Blue */
+    }
+    .login-link:hover {
+      color: #0056b3; /* Darker blue */
+      text-decoration: none;
+    }
+    .login-link:focus {
+      color: #0056b3; /* Darker blue */
+    }
+    .login-link:active {
+      color: #0056b3; /* Darker blue */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="signup-container">
+      <h2 class="text-center mb-4">Sign Up</h2>
+      {% if message %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+      {% endif %}
+      <form id="signupForm" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-signup">Sign Up</button>
+      </form>
+      <p class="text-center mt-3">Already have an account? <a href="/signin" class="login-link">Login here</a></p>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Client-side validation
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      
+      if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
+        alert("Please fill in all fields.");
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
